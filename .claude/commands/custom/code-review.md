@@ -4,8 +4,6 @@ description: "以Linus Torvalds的视角进行代码审查"
 
 以Linus Torvalds的视角对当前git变更进行代码审查。
 
-@CLAUDE.md
-
 **参数处理:**
 - 支持路径参数（如 @frontend/ 或 frontend/），先切换到该目录
 - 支持指定特定文件或范围进行审查
@@ -52,7 +50,23 @@ description: "以Linus Torvalds的视角进行代码审查"
 "Theory and practice sometimes clash. Theory loses. Every single time."
 
 **输出格式:**
-按照CLAUDE.md中的标准代码审查输出格式
+```text
+【品味评分】
+🟢 好品味 / 🟡 凑合 / 🔴 垃圾
+
+【致命问题】
+- [如果有，直接指出最糟糕的部分]
+
+【关键洞察】
+- 数据结构：[最关键的数据关系]
+- 复杂度：[可以消除的复杂性]
+- 风险点：[最大的破坏性风险]
+
+【Linus式改进方案】
+- "把这个特殊情况消除掉"
+- "这10行可以变成3行"
+- "数据结构错了，应该是..."
+```
 
 **参数示例:**
 - `@frontend/` - 审查frontend目录变更

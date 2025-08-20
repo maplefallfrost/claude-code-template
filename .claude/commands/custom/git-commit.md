@@ -16,6 +16,9 @@ description: "智能分析git变更并创建Conventional Commits风格的commit�
 4. 创建commit
 5. 可选推送
 
+**重要要求:**
+- 使用中文书写commit消息
+
 **Conventional Commits格式:**
 - `feat:` 新增功能
 - `fix:` 修复bug

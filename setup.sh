@@ -34,10 +34,17 @@ install() {
 
     # 创建目标目录（如果不存在）
     mkdir -p "$HOME/.claude/commands"
+    mkdir -p "$HOME/.claude/agents"
 
     # 复制.claude/commands目录内容
     echo "📋 复制.claude/commands目录内容到~/.claude/commands/"
     cp -r .claude/commands/* "$HOME/.claude/commands/"
+
+    # 复制agents目录内容（如果存在）
+    if [ -d "agents" ]; then
+        echo "📋 复制agents目录内容到~/.claude/agents/"
+        cp -r agents/* "$HOME/.claude/agents/"
+    fi
 
     echo "✅ 安装完成！"
 }
@@ -66,6 +73,18 @@ uninstall() {
             rm -f "$target_file"
         fi
     done
+
+    # 遍历项目中的agents文件，删除对应的已安装文件
+    if [ -d "agents" ]; then
+        find agents -type f -name "*.md" | while read -r file; do
+            target_file="$HOME/.claude/$file"
+            
+            if [ -f "$target_file" ]; then
+                echo "  删除: ~/.claude/$file"
+                rm -f "$target_file"
+            fi
+        done
+    fi
 
     # 清理空的custom目录（但保留commands目录）
     if [ -d "$HOME/.claude/commands/custom" ] && [ -z "$(ls -A "$HOME/.claude/commands/custom")" ]; then
